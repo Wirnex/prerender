@@ -1,0 +1,32 @@
+version: "2"
+
+services:
+
+  redis:
+    hostname: redis
+    image: redis:3-alpine
+    expose:
+      - 6379
+
+  prerender:
+    build: ./
+    environment:
+      PORT: 3000
+      REDIS_URL: "redis://redis:6379/0"
+      PAGE_TTL: 172800
+      PAGE_DONE_CHECK_TIMEOUT: 300
+      RESOURCE_DOWNLOAD_TIMEOUT: 10000
+      WAIT_AFTER_LAST_REQUEST: 500
+      JS_CHECK_TIMEOUT: 300
+      JS_TIMEOUT: 10000
+      NO_JS_EXECUTION_TIMEOUT: 3000
+      EVALUATE_JAVASCRIPT_CHECK_TIMEOUT: 300
+      NUM_ITERATIONS: 40
+      NUM_SOFT_ITERATIONS: 30
+      PRERENDER_NUM_WORKERS: 8
+    expose:
+      - 3000
+    ports:
+      - "42424:3000"
+    links:
+      - redis
