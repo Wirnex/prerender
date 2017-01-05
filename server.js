@@ -4,7 +4,7 @@ var prerender = require('./lib');
 console.log(JSON.stringify(process.env));
 
 var server = prerender({
-    workers: 1,
+    workers: 2,
     iterations: 1
 });
 
