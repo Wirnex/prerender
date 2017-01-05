@@ -1,11 +1,9 @@
 #!/usr/bin/env node
 var prerender = require('./lib');
 
-console.log(JSON.stringify(process.env));
-
 var server = prerender({
     workers: 2,
-    iterations: 1
+    iterations: 4
 });
 
 
